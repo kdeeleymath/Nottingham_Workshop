@@ -1,17 +1,16 @@
-function bootcampsetup()
+function setupPath()
 % Set up the MATLAB path for the course.
 
-% We want all folders under "BootcampFiles" to be on the path for the course.
-cd('..')
-dirUp = pwd;
-addpath(genpath([dirUp, filesep, 'BootcampFiles']))
+% We want all folders under the class folder to be on the path for the course.
+dirNames = {'ArmsLegs', 'Exercises', 'InstructorMaterials', ...
+            'Reference', 'work'};
+for k = 1:numel(dirNames)
+    addpath(genpath(dirNames{k}));
+end
 
 % We don't want the test data folder on the path yet.
 warning('off', 'MATLAB:rmpath:DirNotFound')
-rmpath([dirUp, filesep, 'BootcampFiles', filesep, 'Test_Data'])
+rmpath('Test_Data')
 warning('on', 'MATLAB:rmpath:DirNotFound')
 
-% Change back to the right directory.
-cd('BootcampFiles')
-
-end % setupCoursePaths
+end % setupPath
